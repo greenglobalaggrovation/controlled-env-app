@@ -1,4 +1,4 @@
-# fh_mini_app
+# controlled-env-app
 
 FH Pod App as designed in flutter. The assets are designed in SolidWorks.
 
