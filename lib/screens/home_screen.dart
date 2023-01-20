@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:fh_mini_app/models/ui_mode.dart';
+import 'package:fh_mini_app/screens/machine.dart';
 import 'package:fh_mini_app/services/auth.dart';
 import 'package:fh_mini_app/ui/components/colors_and_effects.dart';
 import 'package:fh_mini_app/ui/components/fog_panel.dart';
@@ -129,8 +130,8 @@ class _HomePageState extends State<HomePage> {
               children: [
                 UserAccountsDrawerHeader(
                     currentAccountPicture: CircleAvatar(
-                      foregroundImage: NetworkImage(user.photoURL!),
-                    ),
+                        //foregroundImage: NetworkImage(user.photoURL!),
+                        ),
                     accountName: Text(
                       user.displayName ?? "Dummy",
                     ),
@@ -148,7 +149,7 @@ class _HomePageState extends State<HomePage> {
 
                 ListTile(
                     title: const Text('Dark Mode'),
-                    leading: Icon(Icons.nightlight),
+                    leading: Icon(Icons.nightlight_outlined),
                     trailing: Switch(
                       value: uiTheme.getModeValue,
                       onChanged: (value) {
@@ -180,6 +181,18 @@ class _HomePageState extends State<HomePage> {
                         },
                       )
                     : SizedBox.shrink(),
+                ListTile(
+                  title: const Text('Research & Dev'),
+                  leading: Icon(Icons.biotech),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => Machine()));
+                    print("R&D");
+                  },
+                ),
                 ListTile(
                   title: const Text('Log out'),
                   leading: Icon(Icons.logout),

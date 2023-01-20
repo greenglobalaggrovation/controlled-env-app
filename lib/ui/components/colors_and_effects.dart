@@ -145,27 +145,51 @@ class _ColorsAndEffectsState extends State<ColorsAndEffects> {
   }
 }
 
-class EffectsScroll extends StatelessWidget {
+// Neopixel Effects
+class EffectsScroll extends StatefulWidget {
   const EffectsScroll({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<EffectsScroll> createState() => _EffectsScrollState();
+}
+
+class _EffectsScrollState extends State<EffectsScroll> {
+  void effectPush(int index) async {
+    String url = 'http://192.168.4.1/effect/$index';
+    debugPrint(url);
+
+    try {
+      Response fogResponse =
+          await get(Uri.parse(url)).timeout(Duration(seconds: 3));
+      print('Response from ESP : ${fogResponse.body}');
+    } on TimeoutException catch (_) {
+      print('Could not communicate');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    int _selectedIndex;
     return ListWheelScrollView(
+        onSelectedItemChanged: (int index) {
+          setState(() {
+            _selectedIndex = index;
+            effectPush(_selectedIndex);
+            print("Selected Effect Index : $_selectedIndex");
+          });
+        },
         useMagnifier: true,
         magnification: 1.2,
         physics: FixedExtentScrollPhysics(),
         perspective: 0.009,
         itemExtent: 50,
         children: [
-          'Blink',
           'Breathe',
-          'Rainbow',
           'Comet',
-          'Scan',
-          'Chase',
-          'Random'
+          'Rainbow',
+          'Static',
         ].map((e) => CardMaker(text: e)).toList());
   }
 }
