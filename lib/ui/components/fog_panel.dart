@@ -48,7 +48,7 @@ class _FogPanelState extends State<FogPanel> {
                     style: themeData.textTheme.headline4,
                   ),
                   addVerticalSpace(30),
-                  Text('Current fog rate : ${_value.toInt() * 5} %'),
+                  Text('Current fog rate : ${_value.toInt() * 10} %'),
                   Container(
                       child: Slider(
                     divisions: 10,
@@ -56,7 +56,7 @@ class _FogPanelState extends State<FogPanel> {
                     activeColor: Theme.of(context).primaryColor,
                     thumbColor: Theme.of(context).colorScheme.secondary,
                     min: 0,
-                    max: 20,
+                    max: 10,
                     value: _value,
                     onChanged: (value) {
                       setState(() {
@@ -81,7 +81,7 @@ class _FogPanelState extends State<FogPanel> {
                       onChanged: (bool value) {
                         setState(() {
                           fogState = value;
-                          fogState ? fogFetch(1) : fogFetch(11);
+                          fogState ? fogFetch(69) : fogFetch(96);
                         });
                       },
                       secondary: fogState
