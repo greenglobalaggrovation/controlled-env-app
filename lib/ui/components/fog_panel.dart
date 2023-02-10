@@ -17,9 +17,8 @@ class _FogPanelState extends State<FogPanel> {
   double _value = 0.0;
 
   void fogFetch(int index) async {
-    String url = 'http://192.168.4.1/fog/$index';
+    String url = 'http://192.168.4.1/fog?fogCycle=${index}';
     debugPrint(url);
-
     try {
       Response fogResponse =
           await get(Uri.parse(url)).timeout(Duration(seconds: 3));
@@ -48,7 +47,7 @@ class _FogPanelState extends State<FogPanel> {
                     style: themeData.textTheme.headline4,
                   ),
                   addVerticalSpace(30),
-                  Text('Current fog rate : ${_value.toInt() * 10} %'),
+                  Text('Current fog rate : ${_value.toInt() * 5} %'),
                   Container(
                       child: Slider(
                     divisions: 10,

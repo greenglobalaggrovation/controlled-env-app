@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 
 import '../../utils/widget_functions.dart';
 
@@ -29,18 +30,26 @@ class _ProducePanelState extends State<ProducePanel> {
                     style: themeData.textTheme.headline4,
                   ),
                   Center(
-                      child: RichText(
-                          text: TextSpan(
-                              text: 'Section under development ',
-                              style: themeData.textTheme.bodyMedium,
-                              children: [
-                        WidgetSpan(
-                            child: Image.asset(
-                              'assets/images/warning.png',
-                              width: 15,
-                            ),
-                            alignment: PlaceholderAlignment.middle)
-                      ]))),
+                    child: Column(
+                      children: [
+                        RichText(
+                            text: TextSpan(
+                                text: 'Section under development ',
+                                style: themeData.textTheme.bodyMedium,
+                                children: [
+                              WidgetSpan(
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: RiveAnimation.asset(
+                                        'assets/images/cup_loader.riv',
+                                        fit: BoxFit.fill),
+                                  ),
+                                  alignment: PlaceholderAlignment.middle)
+                            ])),
+                      ],
+                    ),
+                  ),
                   addVerticalSpace(10)
                 ]),
           ),

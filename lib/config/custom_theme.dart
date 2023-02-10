@@ -15,7 +15,7 @@ class CustomTheme {
   
   static ThemeData get lightTheme {
     return ThemeData(
-      primaryColor: Color.fromARGB(255, 61, 61, 61), // has no use
+      primaryColor: Color.fromARGB(255, 61, 61, 61), //used in scroll wheel button
       inputDecorationTheme: const InputDecorationTheme(
         labelStyle: TextStyle(color: Colors.black),
         hintStyle: TextStyle(color: Colors.grey),

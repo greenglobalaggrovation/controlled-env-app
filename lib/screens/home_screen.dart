@@ -30,7 +30,6 @@ class _HomePageState extends State<HomePage> {
   bool _controlMode = false;
 
   void controlMode(bool mode) async {
-    //mode ? 1 : 0;
 
     String url = 'http://192.168.4.1/mode/$mode';
     debugPrint(url);
@@ -40,18 +39,6 @@ class _HomePageState extends State<HomePage> {
       print('Response from ESP : ${fogResponse.body}');
     } on TimeoutException catch (_) {
       print('Could not communicate');
-    }
-  }
-
-  void triggerManualMode() async {
-    try {
-      Response resp = await get(Uri.parse('http://192.168.4.1/manualMode'))
-          .timeout(Duration(seconds: 30));
-      debugPrint('In manual mode now (limited)');
-    } on TimeoutException catch (_) {
-      debugPrint('Connection Timeout');
-    } finally {
-      debugPrint('Manual mode ends');
     }
   }
 
@@ -129,8 +116,11 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 34, 34, 34)
+                ),
                     currentAccountPicture: CircleAvatar(
-                        //foregroundImage: NetworkImage(user.photoURL!),
+                        foregroundImage: NetworkImage(user.photoURL!),
                         ),
                     accountName: Text(
                       user.displayName ?? "Dummy",
@@ -200,6 +190,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.pop(context);
                     Navigator.pop(context);
                     _auth.signOut();
+                    
                   },
                 ),
                 Expanded(

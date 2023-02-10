@@ -11,6 +11,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
+import 'package:rive/rive.dart';
 
 class PodScreen extends StatefulWidget {
   const PodScreen({super.key});
@@ -34,7 +35,7 @@ class _PodScreenState extends State<PodScreen> {
 
   void fetchData() async {
     loading = true;
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     try {
       await get(Uri.parse(url)).timeout(const Duration(seconds: 2));
       if (mounted) {
@@ -62,7 +63,7 @@ class _PodScreenState extends State<PodScreen> {
   @override
   void initState() {
     super.initState();
-    print('init state function ran');
+    print('assets are being cached');
     image1 = Image.asset('assets/images/0.gif');
     image2 = Image.asset('assets/images/1.png');
     image3 = Image.asset('assets/images/2.gif');
@@ -101,13 +102,13 @@ class _PodScreenState extends State<PodScreen> {
               child: Column(
                 children: [
                   addVerticalSpace(50),
-                  Image.asset(
-                    'assets/images/leaf.png',
-                    height: size.height * 0.14,
+                  Text(
+                    'EliteEco',
+                    style: themeData.textTheme.headline2,
                   ),
                   Text(
                     'Welcome to the future of food',
-                    style: themeData.textTheme.headline4,
+                    style: themeData.textTheme.headline5,
                   ),
                   addVerticalSpace(30),
                   PodStatus(
@@ -121,12 +122,12 @@ class _PodScreenState extends State<PodScreen> {
             loading
                 ? Center(
                     child: Container(
-                    color: Color.fromARGB(132, 46, 46, 46),
-                    child: SpinKitSquareCircle(
-                      color: Color.fromARGB(255, 117, 235, 49),
-                      size: 48,
-                    ),
-                  ))
+                                    height: 80,
+                                    width: 80,
+                                    child: RiveAnimation.asset(
+                                        'assets/images/zack_animation.riv',
+                                        fit: BoxFit.fill),
+                                  ))
                 : SizedBox.shrink()
           ],
         ),
@@ -158,7 +159,7 @@ class _PodScreenState extends State<PodScreen> {
                 const TextSpan(
                     style: TextStyle(color: Color.fromARGB(255, 124, 124, 124)),
                     text:
-                        'Connection could not be established to Mini. For further information on troubleshooting practices refer to our '),
+                        'Connection could not be established to Pod. For further information on troubleshooting practices refer to our '),
                 TextSpan(
                     text: 'help guide',
                     style: const TextStyle(
@@ -175,7 +176,7 @@ class _PodScreenState extends State<PodScreen> {
                   Navigator.of(context).push(_createRoute(HomePage()));
                 },
                 style: TextButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 177, 245, 138)),
+                    backgroundColor: Color.fromARGB(255, 255, 202, 208),),
                 child: const Text(
                   'Enter anyway',
                 ),
@@ -197,7 +198,7 @@ class PodStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     return hasLoaded
         ? Text(
-            'Connecting to your pod',
+            'Connecting to your pod...',
             style: themeData.textTheme.bodySmall,
           )
         : const Text("Could not find Pod",

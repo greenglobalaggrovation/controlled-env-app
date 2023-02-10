@@ -3,6 +3,7 @@ import 'package:fh_mini_app/shared/loading.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:rive/rive.dart';
 
 import '../../services/auth.dart';
 import '../../utils/widget_functions.dart';
@@ -56,7 +57,7 @@ class _RegisterState extends State<Register> {
                               children: [
                                 Image.asset("assets/images/leaf.png"),
                                 Text(
-                                  'Botanix  ',
+                                  'EliteEco  ',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 22),
@@ -143,7 +144,7 @@ class _RegisterState extends State<Register> {
                                 style: ButtonStyle(
                                     elevation: MaterialStateProperty.all(3),
                                     backgroundColor: MaterialStateProperty.all(
-                                        Color.fromARGB(255, 177, 245, 138)),
+                                       Color.fromARGB(255, 255, 202, 208)),
                                     shape: MaterialStateProperty.all<
                                             RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
@@ -174,7 +175,9 @@ class _RegisterState extends State<Register> {
                           addVerticalSpace(12),
                           Text(
                             error,
-                            style: TextStyle(color: Colors.red),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.red),
                           ),
                           addVerticalSpace(12),
                           RichText(
@@ -234,12 +237,7 @@ class _RegisterState extends State<Register> {
           loading
               ? Center(
                   child: Container(
-                  color: Color.fromARGB(132, 46, 46, 46),
-                  child: SpinKitSquareCircle(
-                    color: Color.fromARGB(255, 117, 235, 49),
-                    size: 48,
-                  ),
-                ))
+                    color: Color.fromARGB(96, 0, 0, 0),))
               : SizedBox.shrink(),
         ]),
       ),
