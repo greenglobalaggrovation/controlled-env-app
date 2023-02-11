@@ -1,3 +1,4 @@
+import 'package:fh_mini_app/screens/home_screen.dart';
 import 'package:fh_mini_app/screens/landing_page.dart';
 import 'package:fh_mini_app/screens/pod_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
