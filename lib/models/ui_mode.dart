@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UIModeModel extends ChangeNotifier {
-  bool getModeValue = false;
+  bool getModeValue = true;
   Color accent = Color.fromARGB(235, 187, 255, 0);
 
   Future<void> getMode() async {
@@ -17,7 +17,7 @@ class UIModeModel extends ChangeNotifier {
     getModeValue = isOn;
     notifyListeners();
   }
-
+ 
   Future<void> setAccent(Color color) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String accentColor = color.toString();

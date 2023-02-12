@@ -26,7 +26,7 @@ class _SpinPanelState extends State<SpinPanel> {
     }
   }
 
-  int currentSpinState = 1;
+  int currentSpinState = 0;
 
   Future<void> setSpinState(int index) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -1,17 +1,14 @@
 import 'dart:async';
 import 'dart:io';
-
-import 'package:fh_mini_app/config/theme.dart';
 import 'package:fh_mini_app/screens/help_guide.dart';
 import 'package:fh_mini_app/screens/home_screen.dart';
 import 'package:fh_mini_app/services/auth.dart';
-import 'package:fh_mini_app/shared/constants.dart';
 import 'package:fh_mini_app/utils/widget_functions.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
-import 'package:rive/rive.dart';
+import 'package:rive/rive.dart' hide LinearGradient; 
 
 class PodScreen extends StatefulWidget {
   const PodScreen({super.key});
@@ -37,7 +34,7 @@ class _PodScreenState extends State<PodScreen> {
     loading = true;
     await Future.delayed(Duration(seconds: 1));
     try {
-      await get(Uri.parse(url)).timeout(const Duration(seconds: 2));
+      await get(Uri.parse(url)).timeout(const Duration(seconds: 1));
       if (mounted) {
         Navigator.pushReplacement(
             context,
@@ -93,45 +90,58 @@ class _PodScreenState extends State<PodScreen> {
     final ThemeData themeData = Theme.of(context);
     return SafeArea(
       child: Scaffold(
-          body: SizedBox(
-        width: size.width,
-        height: size.height,
-        child: Stack(
-          children: [
-            Center(
-              child: Column(
-                children: [
-                  addVerticalSpace(50),
-                  Text(
-                    'EliteEco',
-                    style: themeData.textTheme.headline2,
-                  ),
-                  Text(
-                    'Welcome to the future of food',
-                    style: themeData.textTheme.headline5,
-                  ),
-                  addVerticalSpace(30),
-                  PodStatus(
-                    themeData: themeData,
-                    hasLoaded: loading,
-                  ),
-                  addVerticalSpace(10),
-                ],
-              ),
-            ),
-            loading
-                ? Center(
-                    child: Container(
-                                    height: 80,
-                                    width: 80,
-                                    child: RiveAnimation.asset(
-                                        'assets/images/zack_animation.riv',
-                                        fit: BoxFit.fill),
-                                  ))
-                : SizedBox.shrink()
-          ],
+          body: Stack(
+            children : [ 
+              Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color.fromARGB(255, 216, 61, 230), Color.fromARGB(255, 28, 63, 231)]
+            )
+          ),
         ),
-      )),
+              SizedBox(
+                  width: size.width,
+                  height: size.height,
+                  child: Stack(
+            children: [
+              Center(
+                child: Column(
+                  children: [
+                    addVerticalSpace(50),
+                    Text(
+                      'EliteEco',
+                      style: themeData.textTheme.headline2,
+                    ),
+                    Text(
+                      'Welcome to the future of food',
+                      style: themeData.textTheme.headline5,
+                    ),
+                    addVerticalSpace(30),
+                    PodStatus(
+                      themeData: themeData,
+                      hasLoaded: loading,
+                    ),
+                    addVerticalSpace(10),
+                  ],
+                ),
+              ),
+              loading
+                  ? Center(
+                      child: Container(
+                                      height: 80,
+                                      width: 80,
+                                      child: RiveAnimation.asset(
+                                          'assets/images/zack_animation.riv',
+                                          fit: BoxFit.fill),
+                                    ))
+                  : SizedBox.shrink()
+            ],
+                  ),
+                ),
+          ])
+          ),
     );
   }
 
@@ -172,6 +182,7 @@ class _PodScreenState extends State<PodScreen> {
             actions: [
               TextButton(
                 onPressed: () {
+                  Navigator.pop(context);
                   Navigator.pop(context);
                   Navigator.of(context).push(_createRoute(HomePage()));
                 },

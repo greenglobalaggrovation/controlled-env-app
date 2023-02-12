@@ -1,5 +1,6 @@
 import 'package:fh_mini_app/config/custom_theme.dart';
 import 'package:fh_mini_app/models/ui_mode.dart';
+import 'package:fh_mini_app/screens/help_guide.dart';
 import 'package:fh_mini_app/screens/pod_screen.dart';
 import 'package:fh_mini_app/screens/wrapper.dart';
 import 'package:fh_mini_app/services/auth.dart';

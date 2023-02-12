@@ -1,10 +1,6 @@
 import 'package:fh_mini_app/shared/constants.dart';
-import 'package:fh_mini_app/shared/loading.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:rive/rive.dart';
-
 import '../../services/auth.dart';
 import '../../utils/widget_functions.dart';
 
@@ -41,6 +37,15 @@ class _RegisterState extends State<Register> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Stack(children: [
+          Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color.fromARGB(255, 216, 61, 230), Color.fromARGB(255, 28, 63, 231)]
+            )
+          ),
+        ),
           Container(
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
               child: Form(

@@ -1,11 +1,7 @@
 import 'dart:ui';
-
 import 'package:fh_mini_app/config/palette.dart';
 import 'package:fh_mini_app/config/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../models/ui_mode.dart';
 
 double screenHeight = window.physicalSize.height;
 
