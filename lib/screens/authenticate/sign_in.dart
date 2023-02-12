@@ -4,6 +4,7 @@ import 'package:fh_mini_app/utils/widget_functions.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:rive/rive.dart' hide LinearGradient;
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key, required this.toggleView});
@@ -41,6 +42,15 @@ class _SignInState extends State<SignIn> {
         resizeToAvoidBottomInset: false,
         body: Stack(children: [
           Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color.fromARGB(255, 216, 61, 230), Color.fromARGB(255, 28, 63, 231)]
+            )
+          ),
+        ),
+          Container(
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
               child: Form(
                 key: _formKey,
@@ -56,7 +66,7 @@ class _SignInState extends State<SignIn> {
                               children: [
                                 Image.asset("assets/images/leaf.png"),
                                 Text(
-                                  'Botanix  ',
+                                  'EliteEco  ',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 22),
@@ -143,7 +153,8 @@ class _SignInState extends State<SignIn> {
                                 style: ButtonStyle(
                                     elevation: MaterialStateProperty.all(3),
                                     backgroundColor: MaterialStateProperty.all(
-                                        Color.fromARGB(255, 177, 245, 138)),
+                                      Color.fromARGB(255, 255, 202, 208),
+                                    ),
                                     shape: MaterialStateProperty.all<
                                             RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
@@ -161,7 +172,7 @@ class _SignInState extends State<SignIn> {
                                     if (result == null) {
                                       setState(() {
                                         error =
-                                            'Could not sign with those credentials';
+                                            'Could not sign in with those credentials';
                                         loading = false;
                                       });
                                     }
@@ -176,9 +187,10 @@ class _SignInState extends State<SignIn> {
                           addVerticalSpace(12),
                           Text(
                             error,
-                            style: TextStyle(color: Colors.red),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.red),
                           ),
-
                           addVerticalSpace(12),
 
                           //Sign in Anonymously
@@ -209,7 +221,6 @@ class _SignInState extends State<SignIn> {
                             height: size.height * 0.054,
                             child: ElevatedButton(
                                 style: ButtonStyle(
-
                                     //elevation: MaterialStateProperty.all(3),
                                     backgroundColor: MaterialStateProperty.all(
                                         Color.fromARGB(255, 248, 248, 248)),
@@ -240,36 +251,17 @@ class _SignInState extends State<SignIn> {
                           ),
                         ]),
                       ),
-
                       addVerticalSpace(100)
                     ]),
               )),
           loading
               ? Center(
                   child: Container(
-                  color: Color.fromARGB(132, 46, 46, 46),
-                  child: SpinKitSquareCircle(
-                    color: Color.fromARGB(255, 117, 235, 49),
-                    size: 48,
-                  ),
-                ))
+                    color: Color.fromARGB(96, 0, 0, 0),)
+                    )
               : SizedBox.shrink(),
         ]),
       ),
     );
-  }
-
-  Future<dynamic> LoadingDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: SpinKitWanderingCubes(
-              color: Color.fromARGB(255, 19, 55, 121),
-              size: 50.0,
-            ),
-          );
-        });
   }
 }

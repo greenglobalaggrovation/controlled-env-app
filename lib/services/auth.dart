@@ -58,7 +58,8 @@ class AuthService {
       return null;
     }
   }
-
+  
+  // register with google account
   Future googleLogin() async {
     final googleUser = await googleSignIn.signIn();
     if (googleUser == null) return;

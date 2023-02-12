@@ -1,5 +1,6 @@
+import 'package:fh_mini_app/screens/home_screen.dart';
 import 'package:fh_mini_app/screens/landing_page.dart';
-import 'package:fh_mini_app/screens/pod_screen.dart.dart';
+import 'package:fh_mini_app/screens/pod_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -15,11 +16,12 @@ class Wrapper extends StatelessWidget {
     debugPrint(user.toString());
 
     //return either PodScreen or LandingPage
+
     if (user == null) {
-      debugPrint("user value nulla reporting");
+      debugPrint("user null");
       return LandingPage();
     } else {
-      debugPrint("user value not null reporting");
+      debugPrint("got user");
       return PodScreen();
     }
   }

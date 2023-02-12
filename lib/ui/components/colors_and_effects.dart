@@ -124,17 +124,16 @@ class _ColorsAndEffectsState extends State<ColorsAndEffects> {
                   addVerticalSpace(10),
 
                   //Brightness Track
-                  if (widget.enableAlpha)
-                    SizedBox(
-                      height: 40.0,
-                      width: widget.colorPickerHeight,
-                      child: ColorPickerSlider(
-                        TrackType.alpha,
-                        currentHsvColor,
-                        onColorChanging,
-                        displayThumbColor: widget.displayThumbColor,
-                      ),
+                  SizedBox(
+                    height: 40.0,
+                    width: widget.colorPickerHeight,
+                    child: ColorPickerSlider(
+                      TrackType.alpha,
+                      currentHsvColor,
+                      onColorChanging,
+                      displayThumbColor: widget.displayThumbColor,
                     ),
+                  ),
                 ],
               ),
             ),

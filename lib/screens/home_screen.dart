@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:fh_mini_app/models/ui_mode.dart';
 import 'package:fh_mini_app/screens/machine.dart';
 import 'package:fh_mini_app/services/auth.dart';
@@ -30,8 +29,6 @@ class _HomePageState extends State<HomePage> {
   bool _controlMode = false;
 
   void controlMode(bool mode) async {
-    //mode ? 1 : 0;
-
     String url = 'http://192.168.4.1/mode/$mode';
     debugPrint(url);
     try {
@@ -40,18 +37,6 @@ class _HomePageState extends State<HomePage> {
       print('Response from ESP : ${fogResponse.body}');
     } on TimeoutException catch (_) {
       print('Could not communicate');
-    }
-  }
-
-  void triggerManualMode() async {
-    try {
-      Response resp = await get(Uri.parse('http://192.168.4.1/manualMode'))
-          .timeout(Duration(seconds: 30));
-      debugPrint('In manual mode now (limited)');
-    } on TimeoutException catch (_) {
-      debugPrint('Connection Timeout');
-    } finally {
-      debugPrint('Manual mode ends');
     }
   }
 
@@ -129,9 +114,18 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color.fromARGB(255, 216, 61, 230),
+                            Color.fromARGB(255, 28, 63, 231)
+                          ]),
+                    ),
                     currentAccountPicture: CircleAvatar(
-                        //foregroundImage: NetworkImage(user.photoURL!),
-                        ),
+                      foregroundImage: NetworkImage(user.photoURL!),
+                    ),
                     accountName: Text(
                       user.displayName ?? "Dummy",
                     ),

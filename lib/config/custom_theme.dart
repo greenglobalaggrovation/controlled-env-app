@@ -1,11 +1,7 @@
 import 'dart:ui';
-
 import 'package:fh_mini_app/config/palette.dart';
 import 'package:fh_mini_app/config/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../models/ui_mode.dart';
 
 double screenHeight = window.physicalSize.height;
 
@@ -15,7 +11,7 @@ class CustomTheme {
   
   static ThemeData get lightTheme {
     return ThemeData(
-      primaryColor: Color.fromARGB(255, 61, 61, 61), // has no use
+      primaryColor: Color.fromARGB(255, 61, 61, 61), //used in scroll wheel button
       inputDecorationTheme: const InputDecorationTheme(
         labelStyle: TextStyle(color: Colors.black),
         hintStyle: TextStyle(color: Colors.grey),
