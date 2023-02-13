@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:fh_mini_app/screens/help_guide.dart';
 import 'package:fh_mini_app/screens/home_screen.dart';
 import 'package:fh_mini_app/services/auth.dart';
@@ -44,11 +43,6 @@ class _PodScreenState extends State<PodScreen> {
       }
     } on TimeoutException catch (_) {
       debugPrint("Connection timeout");
-      setState(() {
-        connectionTimeout(context);
-      });
-    } on SocketException catch (_) {
-      debugPrint("Other exception occured");
       setState(() {
         connectionTimeout(context);
       });

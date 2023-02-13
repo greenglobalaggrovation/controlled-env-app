@@ -188,6 +188,13 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
                 ListTile(
+                  title: const Text('View on Map'),
+                  leading: Icon(Icons.location_on_outlined),
+                  onTap: () {
+                    
+                  },
+                ),
+                ListTile(
                   title: const Text('Log out'),
                   leading: Icon(Icons.logout),
                   onTap: () {
