@@ -1,23 +1,34 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class SandBox extends StatelessWidget {
+FirebaseDatabase database = FirebaseDatabase.instance;
+DatabaseReference ref = FirebaseDatabase.instance.ref("mini1/data");
+
+class SandBox extends StatefulWidget {
   const SandBox({super.key});
 
   @override
+  State<SandBox> createState() => _SandBoxState();
+}
+
+class _SandBoxState extends State<SandBox> {
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Container(
-          // child: Scene(
-          //   node: Node.asset("assets/iamges/cylinder.glb")
-          // ),
-        ),
-      )
-      );
+        child: Scaffold(
+      body: Center(
+          child: Column(
+        children: [
+          Container(color: Colors.amber, child: Text("Hello")),
+          FloatingActionButton(onPressed: setDataRTFB)
+        ],
+      )),
+    ));
   }
+}
+
+void setDataRTFB() async {
+  await ref.update({
+    "pin12": 0,
+  });
 }

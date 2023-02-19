@@ -1,8 +1,8 @@
 import 'package:fh_mini_app/config/custom_theme.dart';
 import 'package:fh_mini_app/models/ui_mode.dart';
-import 'package:fh_mini_app/screens/help_guide.dart';
+import 'package:fh_mini_app/screens/home_screen.dart';
 import 'package:fh_mini_app/screens/pod_screen.dart';
-import 'package:fh_mini_app/screens/wrapper.dart';
+import 'package:fh_mini_app/screens/sandbox.dart';
 import 'package:fh_mini_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +16,6 @@ void main() {
 
 class MyApp extends StatefulWidget {
   MyApp({super.key});
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -49,7 +48,7 @@ class _MyAppState extends State<MyApp> {
                         value: AuthService().userStream,
                         initialData: null,
                         catchError: null,
-                        child: Wrapper());
+                        child: HomePage());
                   } else {
                     return Center(
                       child: CircularProgressIndicator(),

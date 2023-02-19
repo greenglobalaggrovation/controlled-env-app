@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:fh_mini_app/models/ui_mode.dart';
+import 'package:fh_mini_app/screens/authenticate/authenticate.dart';
+import 'package:fh_mini_app/screens/landing_page.dart';
 import 'package:fh_mini_app/screens/machine.dart';
 import 'package:fh_mini_app/services/auth.dart';
 import 'package:fh_mini_app/ui/components/colors_and_effects.dart';
@@ -190,16 +192,17 @@ class _HomePageState extends State<HomePage> {
                 ListTile(
                   title: const Text('View on Map'),
                   leading: Icon(Icons.location_on_outlined),
-                  onTap: () {
-                    
-                  },
+                  onTap: () {},
                 ),
                 ListTile(
                   title: const Text('Log out'),
                   leading: Icon(Icons.logout),
                   onTap: () {
                     Navigator.pop(context);
-                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => LandingPage()));
                     _auth.signOut();
                   },
                 ),

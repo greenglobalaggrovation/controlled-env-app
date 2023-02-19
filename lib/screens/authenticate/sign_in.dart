@@ -3,8 +3,6 @@ import 'package:fh_mini_app/shared/constants.dart';
 import 'package:fh_mini_app/utils/widget_functions.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:rive/rive.dart' hide LinearGradient;
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key, required this.toggleView});

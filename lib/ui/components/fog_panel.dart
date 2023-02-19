@@ -1,20 +1,40 @@
 import 'dart:async';
-
-import 'package:fh_mini_app/config/custom_theme.dart';
 import 'package:fh_mini_app/utils/widget_functions.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
+DatabaseReference DBref = FirebaseDatabase.instance.ref();
+bool fogState = false;
+
+void getFogSwitchStateFrmDB() async {
+  final snapshot = await DBref.child('mini1/fog/pin12').get();
+  snapshot.exists ? fogState = snapshot.value as bool : print("No fog data on db");
+}
+
+void updateFogSwitch(bool state) async {
+  print("async func ran");
+  await DBref.child("mini1/fog").update({
+    "pin12": state,
+  });
+}
+
+void readFoggerState() {}
+
 class FogPanel extends StatefulWidget {
   const FogPanel({super.key});
-
   @override
   State<FogPanel> createState() => _FogPanelState();
 }
 
 class _FogPanelState extends State<FogPanel> {
-  bool fogState = false;
   double _value = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    getFogSwitchStateFrmDB();
+  }
 
   void fogFetch(int index) async {
     String url = 'http://192.168.4.1/fog?fogCycle=${index}';
@@ -44,7 +64,7 @@ class _FogPanelState extends State<FogPanel> {
                 children: [
                   Text(
                     'Fog Cycles',
-                    style: themeData.textTheme.headline4,
+                    style: themeData.textTheme.headlineMedium,
                   ),
                   addVerticalSpace(30),
                   Text('Current fog rate : ${_value.toInt() * 5} %'),
@@ -73,14 +93,17 @@ class _FogPanelState extends State<FogPanel> {
                       activeColor: Theme.of(context).colorScheme.secondary,
                       title: Text(
                         'Make it rain',
-                        style: themeData.textTheme.bodyText2,
+                        style: themeData.textTheme.bodyMedium,
                       ),
-                      //contentPadding: EdgeInsets.symmetric(horizontal: 70),
                       value: fogState,
                       onChanged: (bool value) {
+                        // setState(() {
+                        //
+                        //   fogState ? fogFetch(69) : fogFetch(96);
+                        // });
                         setState(() {
+                          updateFogSwitch(value);
                           fogState = value;
-                          fogState ? fogFetch(69) : fogFetch(96);
                         });
                       },
                       secondary: fogState

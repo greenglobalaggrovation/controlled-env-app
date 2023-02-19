@@ -1,6 +1,5 @@
 import 'package:fh_mini_app/screens/authenticate/register.dart';
 import 'package:fh_mini_app/screens/authenticate/sign_in.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class Authenticate extends StatefulWidget {

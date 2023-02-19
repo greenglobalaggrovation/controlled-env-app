@@ -5,7 +5,6 @@ import 'package:fh_mini_app/services/auth.dart';
 import 'package:fh_mini_app/utils/widget_functions.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
 import 'package:rive/rive.dart' hide LinearGradient; 
 
@@ -139,14 +138,6 @@ class _PodScreenState extends State<PodScreen> {
     );
   }
 
-  Widget spinkit(hasLoaded) {
-    return hasLoaded
-        ? const SizedBox.shrink()
-        : const SpinKitWanderingCubes(
-            color: Color.fromARGB(255, 14, 116, 23),
-            size: 22,
-          );
-  }
 
   Future<dynamic> connectionTimeout(BuildContext context) {
     final TapGestureRecognizer gestureRecognizer = TapGestureRecognizer()
