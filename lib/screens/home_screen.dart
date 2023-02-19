@@ -30,6 +30,16 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   bool _controlMode = false;
 
+  //set data for fogPanel in firebase rtdb
+    void setData() async {
+    await DBref.child("mini1/fogSwitch/").set({
+      "pin12": false,
+    });
+    await DBref.child("mini1/fogCycle/").set({
+      "cycle": 0,
+    });
+  }
+
   void controlMode(bool mode) async {
     String url = 'http://192.168.4.1/mode/$mode';
     debugPrint(url);

@@ -5,19 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 DatabaseReference DBref = FirebaseDatabase.instance.ref();
-bool fogState = false;
-
-void getFogSwitchStateFrmDB() async {
-  final snapshot = await DBref.child('mini1/fog/pin12').get();
-  snapshot.exists ? fogState = snapshot.value as bool : print("No fog data on db");
-}
-
-void updateFogSwitch(bool state) async {
-  print("async func ran");
-  await DBref.child("mini1/fog").update({
-    "pin12": state,
-  });
-}
 
 void readFoggerState() {}
 
@@ -28,12 +15,40 @@ class FogPanel extends StatefulWidget {
 }
 
 class _FogPanelState extends State<FogPanel> {
-  double _value = 0.0;
+  num _value = 0.0;
+  bool fogState = false;
+
+  void getFogSwitchStateFrmDB() async {
+    final snapshot = await DBref.child('mini1/fogSwitch/pin12').get();
+    snapshot.exists
+        ? fogState = snapshot.value as bool
+        : print("No fog data on db");
+  }
+
+  void getFogCycleStateFrmDB() async {
+    final snapshot = await DBref.child('mini1/fogCycle/cycle').get();
+    snapshot.exists
+        ? _value = snapshot.value as num
+        : print("No fog cycle data on db");
+  }
+
+  void updateFogSwitch(bool state) async {
+    await DBref.child("mini1/fogSwitch").update({
+      "pin12": state,
+    });
+  }
+
+  void updateFogCycle(int value) async {
+    await DBref.child("mini1/fogCycle").update({
+      "cycle": value,
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     getFogSwitchStateFrmDB();
+    getFogCycleStateFrmDB();
   }
 
   void fogFetch(int index) async {
@@ -76,7 +91,7 @@ class _FogPanelState extends State<FogPanel> {
                     thumbColor: Theme.of(context).colorScheme.secondary,
                     min: 0,
                     max: 10,
-                    value: _value,
+                    value: _value.toDouble(),
                     onChanged: (value) {
                       setState(() {
                         _value = value;
@@ -84,8 +99,7 @@ class _FogPanelState extends State<FogPanel> {
                     },
                     onChangeEnd: (value) {
                       setState(() {
-                        debugPrint('Value ends here : ${value.toInt()}');
-                        fogFetch(value.toInt());
+                        updateFogCycle(value.toInt());
                       });
                     },
                   )),
