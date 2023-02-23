@@ -6,8 +6,6 @@ import 'package:http/http.dart';
 
 DatabaseReference DBref = FirebaseDatabase.instance.ref();
 
-void readFoggerState() {}
-
 class FogPanel extends StatefulWidget {
   const FogPanel({super.key});
   @override
@@ -19,10 +17,14 @@ class _FogPanelState extends State<FogPanel> {
   bool fogState = false;
 
   void getFogSwitchStateFrmDB() async {
-    final snapshot = await DBref.child('mini1/fogSwitch/pin12').get();
+    final snapshot = await DBref.child('mini1/fogState/pin12').get();
     snapshot.exists
         ? fogState = snapshot.value as bool
         : print("No fog data on db");
+    print("FogState is : $fogState");
+    setState(() {
+      print("I set state to update the widget");
+    });
   }
 
   void getFogCycleStateFrmDB() async {
@@ -33,7 +35,7 @@ class _FogPanelState extends State<FogPanel> {
   }
 
   void updateFogSwitch(bool state) async {
-    await DBref.child("mini1/fogSwitch").update({
+    await DBref.child("mini1/fogState").update({
       "pin12": state,
     });
   }

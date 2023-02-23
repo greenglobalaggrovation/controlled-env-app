@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:fh_mini_app/models/ui_mode.dart';
-import 'package:fh_mini_app/screens/authenticate/authenticate.dart';
 import 'package:fh_mini_app/screens/landing_page.dart';
 import 'package:fh_mini_app/screens/machine.dart';
 import 'package:fh_mini_app/services/auth.dart';
@@ -31,13 +30,22 @@ class _HomePageState extends State<HomePage> {
   bool _controlMode = false;
 
   //set data for fogPanel in firebase rtdb
-    void setData() async {
-    await DBref.child("mini1/fogSwitch/").set({
-      "pin12": false,
-    });
-    await DBref.child("mini1/fogCycle/").set({
-      "cycle": 0,
-    });
+  void setData() async {
+    final snapshot = await DBref.child('mini1/').get();
+    if (snapshot.exists) {
+      print("Data present in RTDB");
+    } else {
+      print("RTDM is virgin");
+      await DBref.child("mini1").set({
+        "fogState": {
+          "pin12": false,
+        },
+        "fogCycle": {"cycle": 5},
+        "mode": {
+          "autoMode": true,
+        }
+      });
+    }
   }
 
   void controlMode(bool mode) async {
@@ -76,7 +84,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getBAB();
-
+    setData();
     //triggerManualMode();
   }
 

@@ -4,6 +4,7 @@ import 'package:fh_mini_app/screens/home_screen.dart';
 import 'package:fh_mini_app/screens/pod_screen.dart';
 import 'package:fh_mini_app/screens/sandbox.dart';
 import 'package:fh_mini_app/services/auth.dart';
+import 'package:fh_mini_app/ui/components/fog_panel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

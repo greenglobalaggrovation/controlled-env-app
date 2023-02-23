@@ -76,7 +76,7 @@ class _SpinPanelState extends State<SpinPanel> {
               children: [
                 Text(
                   'Spin it up!',
-                  style: themeData.textTheme.headline4,
+                  style: themeData.textTheme.headlineMedium,
                 ),
                 Center(
                   child: ToggleButtons(

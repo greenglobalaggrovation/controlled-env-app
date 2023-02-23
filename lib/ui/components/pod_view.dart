@@ -18,7 +18,18 @@ class PodView extends StatelessWidget {
     final int providerSpinType =
         Provider.of<SpinChangeModel>(context).currentSpin;
     return SizedBox(
-        height: size.height * 0.38, child: podAsset(uiTheme, providerSpinType));
+        height: size.height * 0.38,
+        child: Stack(children: [
+          podAsset(uiTheme, providerSpinType),
+          Column(
+            children: [
+              DataCard(),
+              DataCard(),
+              DataCard(),
+              DataCard(),
+            ],
+          )
+        ]));
   }
 
   Widget podAsset(bool uiTheme, int spinType) {
@@ -31,5 +42,30 @@ class PodView extends StatelessWidget {
           ? Image.asset('assets/images/$spinType.png')
           : Image.asset('assets/images/$spinType.gif');
     }
+  }
+}
+
+class DataCard extends StatelessWidget {
+  
+  const DataCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 75,
+      width: 75,
+      child: Card(
+        shadowColor: Colors.amber,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8))),
+        color: Colors.red,
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text("RGB Data"),
+        ),
+      ),
+    );
   }
 }

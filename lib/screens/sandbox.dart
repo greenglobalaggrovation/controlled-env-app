@@ -1,6 +1,5 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 FirebaseDatabase database = FirebaseDatabase.instance;
 DatabaseReference ref = FirebaseDatabase.instance.ref("mini1/data");
@@ -22,8 +21,7 @@ class _SandBoxState extends State<SandBox> {
         children: [
           Container(color: Colors.amber, child: Text("Hello")),
           FloatingActionButton(onPressed: () {
-            Fluttertoast.showToast(
-                msg: 'Request Failed', toastLength: Toast.LENGTH_LONG);
+           
           })
         ],
       )),
